@@ -1,0 +1,76 @@
+﻿@model Mindbox1.Models.IndexModel
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link href="@Url.Content("~/css/style.css")" rel="stylesheet" type="text/css" />
+
+
+<div class="view">
+    <div class="row form-horizontal">
+        <div class="col-md-12">
+            <p align="center"><h2>Площадь фигуры по введённым параметрам</h2></p>
+            <br/><br />
+            <div id="fieldPass" style="display: block;">
+
+                @using (Html.BeginForm("Triangle", "Home" ))
+                {
+                 @Html.AntiForgeryToken()
+                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                 <div class="form-group">
+                     <h4>Треугольник</h4><br/>
+                         <h5>Сторона 1 </h5>
+                         <div class="col-sm-3">
+                           @Html.EditorFor(model => model.TriangleSide1, new { htmlAttributes = new { @class = "form-control",autocomplete="off" }})
+                           @Html.ValidationMessageFor(model => model.TriangleSide1, "", new { @class = "text-danger" })  
+                         </div> 
+                         <h5>Сторона 2 </h5>
+                         <div class="col-sm-3">
+                           @Html.EditorFor(model => model.TriangleSide2, new { htmlAttributes = new { @class = "form-control", autocomplete="off" }})
+                           @Html.ValidationMessageFor(model => model.TriangleSide2, "", new { @class = "text-danger" })  
+                         </div> 
+                         <h5>Сторона 3 </h5>
+                         <div class="col-sm-3">
+                           @Html.EditorFor(model => model.TriangleSide3, new { htmlAttributes = new { @class = "form-control", autocomplete="off" }})
+                           @Html.ValidationMessageFor(model => model.TriangleSide3, "", new { @class = "text-danger" })  
+                         </div> 
+                  </div>    
+                    <br/>
+                    <div class="form-group">
+                            <input type="submit" value="Считаем" class="btn btn-outline-success" />
+                    </div><br/>
+                    <p> <b>@HttpContextAccessor.HttpContext.Session.GetString("Triangle")</b> </p>
+                                        <br/><br/>   
+                }
+
+
+            <div id="fieldPass" style="display: block;">
+                @using (Html.BeginForm("Circle", "Home"))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <h4>Круг</h4><br/>
+                         <h5>Найти площадь круга по радиусу  </h5>
+                        <div class="col-sm-3">
+                            @Html.EditorFor(model => model.CircleRadius, new { htmlAttributes = new { @class = "form-control", autocomplete="off" }})
+                            @Html.ValidationMessageFor(model => model.CircleRadius, "", new { @class = "text-danger" })                           </div>
+             </div>
+             <br/>
+            <div class="form-group">
+                    <input type="submit" value="Считаем" class="btn btn-outline-success" />
+            </div><br/>
+           <p> <b>@HttpContextAccessor.HttpContext.Session.GetString("Circle") </b></p> 
+                }
+
+        </div>
+    </div>
+  </div>
+ </div>
+</div>
